@@ -1,5 +1,27 @@
 version: '2.1'
 services:
+
+  revolution-lamp-:
+    container_name: revolution-lamp
+    image: mattrayner/lamp:1604-php5-base
+    # env_file:
+    #  - ./.env
+    volumes:
+      - /home/max/stage/server-health-metrics/:/func/
+      - /home/max/stage/tmp/:/tmp/
+      - /home/max/stage/data/:/data/
+      - /home/max/deployments/min-bb/:/big-max
+      - /home/max/deployments/nmt-bod-z5bod-otsta001-s3a/:/nmt/      
+      - /home/max/stage/az-management/app/.bash_history:/root/.bash_history
+    tty: true
+    ports:
+      # - "8083:8083"
+      # - "443:443"
+      - "7071:7071"
+
+    working_dir: /nmt/
+    command: ["./run.sh"]
+
   php:
     hostname: php
     build: ./php
